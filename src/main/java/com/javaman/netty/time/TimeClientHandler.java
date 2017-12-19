@@ -25,11 +25,25 @@ public class TimeClientHandler extends ChannelHandlerAdapter {
         ctx.close();
     }
 
+    /**
+     * 当客户端跟服务端TCP连接建立成功后,Netty的NIO线程会调用channelActive方法,发送查询的指令给服务端
+     *
+     * @param ctx
+     * @throws Exception
+     */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        //将请求消息发送给服务端
         ctx.writeAndFlush(firstMessage);
     }
 
+    /**
+     * 当服务端响应应答消息后,channelRead方法被调用
+     *
+     * @param ctx
+     * @param msg
+     * @throws Exception
+     */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         ByteBuf buf = (ByteBuf) msg;
