@@ -1,4 +1,4 @@
-package com.javaman.netty;
+package com.javaman.netty.demo;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
