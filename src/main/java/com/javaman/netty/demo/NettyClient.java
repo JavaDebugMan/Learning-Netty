@@ -26,9 +26,11 @@ public class NettyClient {
                         ch.pipeline().addLast(new ClientHandler());
                     }
                 });
+        //发起异步连接操作
         ChannelFuture channelFuture = bootstrap.connect("127.0.0.1", 8765).sync();
         channelFuture.channel().write(Unpooled.copiedBuffer("伟大的哲哥".getBytes()));
         channelFuture.channel().flush();
+
         channelFuture.channel().closeFuture().sync();
         workGroup.shutdownGracefully();
     }

@@ -17,6 +17,8 @@ public class NettyServer {
 
     public static void main(String[] args) throws InterruptedException {
         /**
+         * EventLoopGroup是一个线程组,它包含了一组NIO线程,专门用于网络时间的处理,实际上
+         * 他们就是Reactor线程组
          *1.第一个线程组是用于接收Client请求的
          */
         EventLoopGroup bossGroup = new NioEventLoopGroup();
@@ -26,6 +28,7 @@ public class NettyServer {
         EventLoopGroup workGroup = new NioEventLoopGroup();
         /**
          *3.创建一个辅助类,就是对我们的Server进行一系列的配置
+         * 降低服务端的开发复杂度
          */
         ServerBootstrap serverBootstrap = new ServerBootstrap();
         //将两个线程组加入进来
