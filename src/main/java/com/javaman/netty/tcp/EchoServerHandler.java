@@ -15,7 +15,6 @@ public class EchoServerHandler extends ChannelHandlerAdapter {
 
     int counter = 0;
 
-    @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg)
             throws Exception {
         String body = (String) msg;
