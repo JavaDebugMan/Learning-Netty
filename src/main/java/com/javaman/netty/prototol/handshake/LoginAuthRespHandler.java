@@ -24,7 +24,6 @@ public class LoginAuthRespHandler extends ChannelHandlerAdapter {
     private String[] writeList = {"127.0.0.1", "192.168.1.5"};
 
 
-    @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         NettyMessage message = (NettyMessage) msg;
         //如果是握手请求消息,处理，其他消息透传

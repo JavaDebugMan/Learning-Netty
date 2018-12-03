@@ -17,12 +17,10 @@ public class LoginAuthReqHandler extends ChannelHandlerAdapter {
     private static final Log LOG = LogFactory.getLog(LoginAuthReqHandler.class);
 
 
-    @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         ctx.writeAndFlush(buildLoginReq());
     }
 
-    @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         NettyMessage message = (NettyMessage) msg;
         //如果是握手应答消息成功,需要判断是否认证成功

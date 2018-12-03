@@ -31,7 +31,6 @@ public class TimeClientHandler extends ChannelHandlerAdapter {
      * @param ctx
      * @throws Exception
      */
-    @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         //将请求消息发送给服务端
         ctx.writeAndFlush(firstMessage);
@@ -44,7 +43,6 @@ public class TimeClientHandler extends ChannelHandlerAdapter {
      * @param msg
      * @throws Exception
      */
-    @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         ByteBuf buf = (ByteBuf) msg;
         byte[] req = new byte[buf.readableBytes()];

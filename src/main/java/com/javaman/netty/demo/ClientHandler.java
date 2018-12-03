@@ -9,7 +9,6 @@ import io.netty.channel.ChannelHandlerContext;
  * Date:2017/11/23
  */
 public class ClientHandler extends ChannelHandlerAdapter {
-    @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         ((ByteBuf) msg).release();
     }

@@ -18,7 +18,6 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
 
     }
 
-    @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         ByteBuf buf = (ByteBuf) msg;
         byte[] req = new byte[buf.readableBytes()];
@@ -29,10 +28,8 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
                 ? new Date(System.currentTimeMillis()).toString() : "BAD ORDER";
         ByteBuf resp = Unpooled.copiedBuffer(currencyTime.getBytes());
         ctx.write(resp);
-
     }
 
-    @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
         ctx.flush();
     }
