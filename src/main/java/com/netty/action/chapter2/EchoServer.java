@@ -24,16 +24,10 @@ public class EchoServer {
     }
 
     public static void main(String[] args) throws Exception {
-       /* if (args.length != 1) {
-            System.out.println("Usage:" + EchoServer.class.getSimpleName() + "<port>");
-            return;
-        }*/
-        // int port = Integer.parseInt(args[0]);
         new EchoServer(8080).start();
     }
 
     public void start() throws Exception {
-        final EchoServerHandler serverHandler = new EchoServerHandler();
         EventLoopGroup group = new NioEventLoopGroup();
         try {
             ServerBootstrap bootstrap = new ServerBootstrap();
@@ -42,12 +36,12 @@ public class EchoServer {
                     .localAddress(new InetSocketAddress(port))
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
-                        protected void initChannel(SocketChannel socketChannel) throws Exception {
-                            socketChannel.pipeline().addLast(serverHandler);
+                        protected void initChannel(SocketChannel socketChannel) {
+                            socketChannel.pipeline().addLast(new EchoServerHandler());
                         }
                     });
             ChannelFuture sync = bootstrap.bind().sync();
-            System.out.println("The server is listening");
+            System.out.println("The server is listening on 8080");
             sync.channel().closeFuture().sync();
         } finally {
             group.shutdownGracefully().sync();

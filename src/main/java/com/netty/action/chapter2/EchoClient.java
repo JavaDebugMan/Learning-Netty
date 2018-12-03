@@ -36,11 +36,13 @@ public class EchoClient {
                     .remoteAddress(new InetSocketAddress(host, port))
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override
-                        protected void initChannel(SocketChannel ch) throws Exception {
+                        protected void initChannel(SocketChannel ch) {
                             ch.pipeline().addLast(new EchoClientHandler());
                         }
                     });
+            System.out.println("客户端开始连接服务端.....");
             ChannelFuture sync = bootstrap.connect().sync();
+            System.out.println("客户端连接服务端成功了!!!");
             sync.channel().closeFuture().sync();
         } finally {
             group.shutdownGracefully().sync();
@@ -48,12 +50,6 @@ public class EchoClient {
     }
 
     public static void main(String[] args) throws InterruptedException {
-    /*    if (args.length != 2) {
-            System.out.println("Usage:" + EchoClient.class.getSimpleName() + "<host> <port>");
-            return;
-        }
-        String host = args[0];
-        int port = Integer.parseInt(args[1]);*/
         new EchoClient("localhost", 8080).start();
     }
 }
